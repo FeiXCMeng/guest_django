@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>Dganjo Page</title>
+    </head>
+    <body>
+        <h1>Hello,  Django!</h1>
+        <form method="post" action="/login_action/">
+            <input name="username" type="text" placeholder="username" ><br>
+            <input name="password" type="password" placeholder="password" ><br>
+            {{ error }}<br>
+            <button id="btn" type="submit" >登陆</button>
+            {% csrf_token %}
+        </form>
+        
+    </body>
+</html>
