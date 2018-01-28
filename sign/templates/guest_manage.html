@@ -1,1 +1,64 @@
+<html lang="zh-CN">
+    <head>
+        {% load bootstrap3 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        <title>Guest Manage</title>
+    </head>
+    <body role="document">
+        <!-- 导航栏 -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/event_manage/">Guest Manage System</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/event_manage/">发布会</a></li>
+                        <li ><a href="/guest_manage/">嘉宾</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">{{ user }}</a></li>
+                        <li><a href="/logout/">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 发布会搜索-->
+        <div class="page-header" style="padding-top: 40px; padding-left: 50px;">
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form" method="get" action="/search_name/">
+                    <div class="form-group">
+                        <input name="name" type="text" placeholder="名称" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">搜索</button>
+                </form>
 
+            </div>
+        </div>
+        <!-- 发布会列表-->
+        <div class="row" style="padding-top: 10px; padding-left: 70px;">
+            <div>
+                <table class="table table-scripted">
+                    <thead>
+                        <tr>
+                            <th>id</th><th>名称</th><th>手机</th><th>Email</th><th>签到</th><th>发布会</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for guest in guests %}
+                            <tr>
+                                <td>{{ guest.id }}</td>
+                                <td>{{ guest.realname }}</td>
+                                <td>{{ guest.phone }}</td>
+                                <td>{{ guest.email }}</td>
+                                <td>{{ guest.sign }}</td>
+                                <td>{{ guest.event }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
