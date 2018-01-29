@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from sign.models import Event, Guest
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 def index(request):
@@ -45,4 +46,12 @@ def search_name(request):
 def guest_manage(request):
     guest_list = Guest.objects.all()
     username = request.session.get('user', '')
-    return  render(request, 'guest_manage.html', {'user': username, 'guests':guest_list})
+    paginator = Paginator(guest_list, 2)
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        contacts = paginator.page(1)
+    except EmptyPage:
+        contacts = paginator.page(paginator.num_pages)
+    return  render(request, 'guest_manage.html', {'user': username, 'guests':contacts})
