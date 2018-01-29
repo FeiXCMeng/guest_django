@@ -60,5 +60,21 @@
                 </table>
             </div>
         </div>
+
+
+        <!--分页-->
+        <div class="pagination" style="padding-left: 60px">
+             <span class="step-links">
+                 {% if guests.has_previous %}
+                    <a href="?page={{ guests.previous_page_number }}">上一页</a>
+                 {% endif %}
+                    <span class="current">
+                        第{{ guests.number }}页，共{{ guests.paginator.num_pages }}
+                    </span>
+                {% if guests.has_next %}
+                    <a href="?page={{ guests.next_page_number }}">下一页</a>
+                {% endif %}
+             </span>
+        </div>
     </body>
 </html>
